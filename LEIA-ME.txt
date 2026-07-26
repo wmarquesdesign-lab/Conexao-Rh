@@ -1,0 +1,12 @@
+CONEXÃO RH — INSTALAÇÃO NO CELULAR E SUPABASE
+
+1. Publique todos os arquivos desta pasta em um servidor HTTPS.
+2. Ao abrir no celular, aparecerá o botão “Salvar no celular”.
+3. No Supabase, abra o SQL Editor e execute supabase-configuracao.sql.
+4. A URL e a chave pública do projeto já estão configuradas no site.
+5. Abra o site e confirme no painel que aparece “Supabase conectado e sincronizado”.
+
+IMPORTANTE:
+- Nunca coloque a chave secreta service_role no site.
+- O aviso de instalação funciona corretamente quando o site está publicado em HTTPS.
+- No iPhone, a instalação é concluída pelo menu Compartilhar > Adicionar à Tela de Início.
