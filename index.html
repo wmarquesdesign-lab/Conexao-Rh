@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Conexão RH">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <title>Conexão RH - Paty Miguel e Região Sul Fluminense</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #10b981;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .header-logo-container {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-logo-container img {
+            max-height: var(--logo-max-height, 80px);
+            max-width: var(--logo-max-width, 250px);
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .config-btn-container {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .config-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 10px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .config-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .visitor-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .visitor-counter span#visitCount {
+            color: #38bdf8;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: -25px auto 30px auto;
+            position: relative;
+            z-index: 10;
+            padding: 0 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .sidebar-ads {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sidebar-ads h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 4px;
+        }
+
+        .ad-square {
+            width: 100%;
+            height: 140px;
+            background: #f1f5f9;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .ad-square:hover {
+            border-color: var(--primary);
+        }
+
+        .ad-square img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ad-square span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .bottom-banner {
+            margin-top: 40px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .bottom-banner h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #38bdf8;
+        }
+
+        .bottom-banner p {
+            font-size: 1.05rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        .btn-banner {
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-banner:hover {
+            background: #1ebe57;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        .card-img-container {
+            width: 100%;
+            background: #0f172a;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-tags-container {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .card-tag {
+            align-self: flex-start;
+            background: #dbeafe;
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .card-tag-sub {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .card-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-top: 1px solid var(--border-color);
+            padding: 14px 20px;
+            background: #fafafa;
+            margin-top: auto;
+        }
+
+        .card-footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .whatsapp-btn, .email-btn, .edit-btn, .nao-tem-badge {
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+            flex: 1;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1ebe57;
+        }
+
+        .email-btn {
+            background: #475569;
+            color: white;
+        }
+
+        .email-btn:hover {
+            background: #334155;
+        }
+
+        .edit-btn {
+            background: #f59e0b;
+            color: white;
+            border: 0;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .edit-btn:hover {
+            background: #d97706;
+        }
+
+        .nao-tem-badge {
+            background: #e2e8f0;
+            color: #64748b;
+            cursor: default;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .checkbox-container input {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 15px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--text-main);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input[type="file"] {
+            padding: 8px;
+            background: #f8fafc;
+            cursor: pointer;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--primary);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn-secondary {
+            background: var(--border-color);
+            color: var(--text-main);
+            border: none;
+            padding: 10px 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+        }
+
+        .install-notice {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 18px;
+            background: rgb(15 23 42 / 0.58);
+        }
+
+        .install-notice.active { display: flex; }
+
+        .install-card {
+            width: min(100%, 460px);
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 24px 70px rgb(15 23 42 / 0.35);
+            animation: installUp .3s ease-out;
+        }
+
+        .install-card h2 { margin-bottom: 8px; font-size: 1.35rem; }
+        .install-card p { color: var(--text-muted); margin-bottom: 18px; }
+        .install-card .modal-actions { margin-top: 0; }
+        .sync-status { font-size: .82rem; margin-top: 8px; color: var(--text-muted); }
+        .sync-status.online { color: #047857; }
+        .sync-status.error { color: #b91c1c; }
+
+        @keyframes installUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div id="installNotice" class="install-notice" role="dialog" aria-modal="true" aria-labelledby="installTitle">
+        <div class="install-card">
+            <h2 id="installTitle">📲 Salvar Conexão RH no celular</h2>
+            <p id="installText">Instale o site para abrir rapidamente pela tela inicial, como um aplicativo.</p>
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="installLater">Agora não</button>
+                <button type="button" class="btn-primary" id="installApp">Salvar no celular</button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="config-btn-container">
+            <button class="config-btn" onclick="openModal('modalLogin')">🔒 Config</button>
+        </div>
+        
+        <div id="headerLogoContainer" class="header-logo-container"></div>
+
+        <h1 id="headerTitleDisplay">Conexão RH - Paty Miguel e Região Sul Fluminense</h1>
+        <p id="headerSubtitleDisplay">Encontre oportunidades de emprego, divulgue seu currículo e cartazes de trabalho na nossa região.</p>
+        
+        <div class="visitor-counter">
+            👁️ Visitantes: <span id="visitCount">Carregando...</span>
+        </div>
+    </header>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="vagas" onclick="switchTab('vagas', this)">📋 Vagas de Emprego</button>
+        <button class="tab-btn" data-tab="curriculos" onclick="switchTab('curriculos', this)">📄 Banco de Currículos</button>
+    </div>
+
+    <div class="container">
+
+        <div class="main-layout">
+            <div>
+                <div id="vagas" class="tab-content active">
+                    <div class="section-header">
+                        <h2>Mural de Vagas Oferecidas</h2>
+                    </div>
+                    <div class="grid" id="gridVagas"></div>
+                </div>
+
+                <div id="curriculos" class="tab-content">
+                    <div class="section-header">
+                        <h2>Banco de Currículos Disponíveis</h2>
+                    </div>
+                    <div class="grid" id="gridCurriculos"></div>
+                </div>
+            </div>
+
+            <aside class="sidebar-ads">
+                <h3>Patrocínios & Avisos</h3>
+                <div id="sidebarAdsContainer"></div>
+            </aside>
+        </div>
+
+        <div class="bottom-banner">
+            <h2>Coloque anúncios no site entre em contato aqui</h2>
+            <p>Destaque sua empresa ou serviço para toda a região de Paty do Alferes, Miguel Pereira e Sul Fluminense.</p>
+            <a class="btn-banner" href="https://api.whatsapp.com/send?phone=5524981225133&amp;text=Ol%C3%A1%21%20Gostaria%20de%20fazer%20minha%20propaganda%20no%20site%20Conex%C3%A3o%20RH%20e%20entrar%20em%20contato." target="_blank" rel="noopener noreferrer">
+                💬 Entre em Contato pelo WhatsApp
+            </a>
+        </div>
+
+    </div>
+
+    <div id="modalLogin" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modalLogin')">&times;</button>
+            <h3>Painel de Configurações</h3>
+            <form id="formLogin" onsubmit="checkLogin(event)">
+                <div class="form-group">
+                    <label>Usuário</label>
+                    <input type="text" id="loginUser" placeholder="Usuário administrador" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="loginPass" placeholder="Senha de acesso" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('modalLogin')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalAdminAds" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modalAdminAds')">&times;</button>
+            <h3>Painel de Administração do Site</h3>
+            
+            <p style="color: var(--text-muted); margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Gerenciar Cabeçalho e Logo:</p>
+            <div class="form-group">
+                <label>Título do Cabeçalho</label>
+                <input type="text" id="adminHeaderTitle" placeholder="Título principal">
+            </div>
+            <div class="form-group">
+                <label>Subtítulo do Cabeçalho</label>
+                <input type="text" id="adminHeaderSub" placeholder="Subtítulo ou descrição">
+            </div>
+            <div class="form-group">
+                <label>Altura Máxima da Logo (ex: 80px, 120px)</label>
+                <input type="text" id="adminLogoHeight" placeholder="Ex: 80px">
+            </div>
+            <div class="form-group">
+                <label>Largura Máxima da Logo (ex: 250px, 400px)</label>
+                <input type="text" id="adminLogoWidth" placeholder="Ex: 250px">
+            </div>
+            <div class="form-group">
+                <label>Importar Imagem da Logo</label>
+                <input type="file" id="adminLogoFile" accept="image/*">
+            </div>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button type="button" class="btn-primary" style="flex: 1; justify-content: center; background: var(--primary);" onclick="saveHeaderSettings()">Salvar Cabeçalho e Logo</button>
+                <button type="button" class="btn-primary" style="background: #dc2626; justify-content: center;" onclick="removeHeaderLogo()">Remover Logo</button>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 20px;">
+
+            <p style="color: var(--text-muted); margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Sincronização Supabase:</p>
+            <div class="form-group">
+                <label for="adminSupabaseUrl">URL do projeto Supabase</label>
+                <input type="url" id="adminSupabaseUrl" placeholder="https://seu-projeto.supabase.co" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="adminSupabaseKey">Chave pública (anon / publishable)</label>
+                <input type="password" id="adminSupabaseKey" placeholder="Cole somente a chave pública" autocomplete="off">
+                <small style="color: var(--text-muted);">Nunca use a chave secreta “service_role” no site.</small>
+                <div id="supabaseStatus" class="sync-status">Supabase não configurado.</div>
+            </div>
+            <div style="display:flex; gap:10px; margin-bottom:20px;">
+                <button type="button" class="btn-primary" style="flex:1; justify-content:center; background:var(--primary);" onclick="salvarSupabase()">Conectar Supabase</button>
+                <button type="button" class="btn-secondary" onclick="desconectarSupabase()">Desconectar</button>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 20px;">
+
+            <p style="color: var(--text-muted); margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Gerenciar Propagandas:</p>
+            <div style="margin-bottom: 15px; text-align: center;">
+                <button type="button" class="btn-primary" style="width: 100%; justify-content: center;" onclick="addNewAdSquare()">+ Adicionar Novo Quadrado de Propaganda</button>
+            </div>
+
+            <div class="form-group">
+                <label>Escolher Espaço Existente</label>
+                <select id="adminAdIndex"></select>
+            </div>
+            <div class="form-group">
+                <label>Importar Imagem do Anúncio</label>
+                <input type="file" id="adminAdFile" accept="image/*">
+            </div>
+            <div style="margin-bottom: 20px;">
+                <button type="button" class="btn-primary" style="width: 100%; justify-content: center; background: var(--primary);" onclick="saveAdminAd()">Atualizar Imagem do Anúncio</button>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 20px;">
+
+            <p style="color: var(--text-muted); margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Gerenciar Publicações:</p>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                <button type="button" class="btn-primary" style="flex: 1; justify-content: center;" onclick="abrirNovaVaga()">+ Publicar Vaga</button>
+                <button type="button" class="btn-primary" style="flex: 1; justify-content: center; background: var(--primary);" onclick="abrirNovoCurriculo()">+ Cadastrar Currículo</button>
+            </div>
+            <div class="form-group">
+                <label>Selecionar Vaga</label>
+                <select id="adminVagaSelect"></select>
+                <button type="button" class="btn-primary" style="background: #f59e0b; width: 100%; justify-content: center; margin-top: 8px;" onclick="editarVagaSelecionada()">✏️ Editar Vaga Selecionada</button>
+                <button type="button" class="btn-primary" style="background: #dc2626; width: 100%; justify-content: center; margin-top: 8px;" onclick="adminApagarVagaIndividual()">🗑️ Apagar Vaga Selecionada</button>
+            </div>
+
+            <div class="form-group" style="margin-top: 15px;">
+                <label>Selecionar Currículo</label>
+                <select id="adminCurriculoSelect"></select>
+                <button type="button" class="btn-primary" style="background: #f59e0b; width: 100%; justify-content: center; margin-top: 8px;" onclick="editarCurriculoSelecionado()">✏️ Editar Currículo Selecionado</button>
+                <button type="button" class="btn-primary" style="background: #dc2626; width: 100%; justify-content: center; margin-top: 8px;" onclick="adminApagarCurriculoIndividual()">🗑️ Apagar Currículo Selecionado</button>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 20px 0;">
+
+            <p style="color: var(--text-muted); margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ações em Massa:</p>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                <button type="button" class="btn-primary" style="background: #dc2626; justify-content: center;" onclick="adminApagarTodasVagas()">🗑️ Apagar Todas as Vagas</button>
+                <button type="button" class="btn-primary" style="background: #dc2626; justify-content: center;" onclick="adminApagarTodosCurriculos()">🗑️ Apagar Todos os Currículos</button>
+                <button type="button" class="btn-primary" style="background: #d97706; justify-content: center;" onclick="adminZerarContador()">🔄 Zerar Contador de Visitantes</button>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" style="width: 100%;" onclick="closeModal('modalAdminAds')">Fechar Painel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalVaga" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modalVaga')">&times;</button>
+            <h3 id="modalVagaTitle">Publicar Nova Vaga de Emprego</h3>
+            <form id="formVaga" onsubmit="addVaga(event)">
+                <div class="form-group">
+                    <label>Título da Vaga / Cargo</label>
+                    <input type="text" id="vagaTitulo" placeholder="Ex: Assistente Administrativo" required>
+                </div>
+                <div class="form-group">
+                    <label>Empresa / Local</label>
+                    <input type="text" id="vagaEmpresa" placeholder="Ex: Supermercado Local (Paty do Alferes)" required>
+                </div>
+                <div class="form-group">
+                    <label>Descrição e Requisitos</label>
+                    <textarea id="vagaDesc" rows="3" placeholder="Detalhes da vaga, horários e requisitos..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Foto do Cartaz ou Empresa (Opcional)</label>
+                    <input type="file" id="vagaFoto" accept="image/*">
+                </div>
+                
+                <div class="form-group">
+                    <label>WhatsApp para Contato (com DDD)</label>
+                    <input type="tel" id="vagaWhats" placeholder="Ex: 24981225133" inputmode="numeric" autocomplete="tel" maxlength="15">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="checkSemWhats" onchange="toggleCampoContato('Whats')"> Não tem WhatsApp
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>E-mail para Contato (Opcional)</label>
+                    <input type="email" id="vagaEmail" placeholder="Ex: rh@suaempresa.com">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="checkSemEmail" onchange="toggleCampoContato('Email')"> Não tem E-mail
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('modalVaga')">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="submitVagaBtn">Publicar Vaga</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalCurriculo" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modalCurriculo')">&times;</button>
+            <h3 id="modalCurriculoTitle">Cadastrar Currículo</h3>
+            <form id="formCurriculo" onsubmit="addCurriculo(event)">
+                <div class="form-group">
+                    <label>Seu Nome Completo</label>
+                    <input type="text" id="cvNome" placeholder="Ex: Wagner Marques" required>
+                </div>
+                <div class="form-group">
+                    <label>Cargo Desejado</label>
+                    <input type="text" id="cvCargo" placeholder="Ex: Gestor / Assistente CPD" required>
+                </div>
+                <div class="form-group">
+                    <label>Resumo Profissional / Experiências</label>
+                    <textarea id="cvResumo" rows="3" placeholder="Resuma sua trajetória e principais habilidades..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp para Contato (com DDD)</label>
+                    <input type="tel" id="cvWhats" placeholder="Ex: 24981225133" inputmode="numeric" autocomplete="tel" maxlength="15" required>
+                </div>
+                <div class="form-group">
+                    <label>Arquivo do Currículo (PDF, DOC ou DOCX)</label>
+                    <input type="file" id="cvArquivo" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    <small style="color: var(--text-muted);">Limite de 2 MB. Ao editar, deixe vazio para manter o arquivo atual.</small>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('modalCurriculo')">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="submitCurriculoBtn">Salvar Currículo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script>
+        function initVisitorCounter() {
+            let count = localStorage.getItem('site_visitor_count_v2');
+            
+            if (!sessionStorage.getItem('visited_session')) {
+                if (!count) {
+                    count = 1240; 
+                } else {
+                    count = parseInt(count) + 1;
+                }
+                localStorage.setItem('site_visitor_count_v2', count);
+                sessionStorage.setItem('visited_session', 'true');
+            } else {
+                if (!count) count = 1240;
+            }
+
+            document.getElementById('visitCount').innerText = Number(count).toLocaleString('pt-BR');
+        }
+
+        function readStorage(key, fallback) {
+            try {
+                const value = localStorage.getItem(key);
+                return value === null ? fallback : JSON.parse(value);
+            } catch (error) {
+                console.warn(`Não foi possível ler "${key}".`, error);
+                return fallback;
+            }
+        }
+
+        function writeStorage(key, value) {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+                sincronizarChave(key, value);
+                return true;
+            } catch (error) {
+                alert('Não foi possível salvar. O armazenamento do navegador pode estar cheio. Tente usar uma imagem menor.');
+                console.error(`Não foi possível salvar "${key}".`, error);
+                return false;
+            }
+        }
+
+        const CHAVES_SINCRONIZADAS = new Set([
+            'vagas_paty_miguel_v2',
+            'curriculos_paty_miguel_v2',
+            'sidebar_ads_v2',
+            'header_data_v2'
+        ]);
+        const SUPABASE_PADRAO = {
+            url: 'https://hamqqhkwebdiqhaxyneu.supabase.co',
+            key: 'sb_publishable_Ugr-Y_tf0-soVIWD1EHhzw_aWOVNVdm'
+        };
+        let supabaseClient = null;
+        let sincronizandoNuvem = false;
+
+        function obterSupabaseConfig() {
+            const configuracaoSalva = readStorage('supabase_config_v1', SUPABASE_PADRAO);
+            return {
+                url: configuracaoSalva?.url || SUPABASE_PADRAO.url,
+                key: configuracaoSalva?.key || SUPABASE_PADRAO.key
+            };
+        }
+
+        function atualizarStatusSupabase(texto, classe = '') {
+            const status = document.getElementById('supabaseStatus');
+            if (!status) return;
+            status.textContent = texto;
+            status.className = `sync-status ${classe}`.trim();
+        }
+
+        async function iniciarSupabase(carregarDados = true) {
+            const config = obterSupabaseConfig();
+            if (!config.url || !config.key) {
+                supabaseClient = null;
+                atualizarStatusSupabase('Supabase não configurado.');
+                return false;
+            }
+            if (!window.supabase?.createClient) {
+                atualizarStatusSupabase('Biblioteca do Supabase não carregou.', 'error');
+                return false;
+            }
+            try {
+                supabaseClient = window.supabase.createClient(config.url, config.key);
+                atualizarStatusSupabase('Conectando…');
+                const { error } = await supabaseClient
+                    .from('conexao_rh_data')
+                    .select('key')
+                    .limit(1);
+                if (error) throw error;
+                atualizarStatusSupabase('Supabase conectado e sincronizado.', 'online');
+                if (carregarDados) await carregarDadosSupabase();
+                return true;
+            } catch (error) {
+                supabaseClient = null;
+                atualizarStatusSupabase(`Falha na conexão: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function carregarDadosSupabase() {
+            if (!supabaseClient || sincronizandoNuvem) return;
+            sincronizandoNuvem = true;
+            try {
+                const { data, error } = await supabaseClient
+                    .from('conexao_rh_data')
+                    .select('key,value')
+                    .in('key', [...CHAVES_SINCRONIZADAS]);
+                if (error) throw error;
+                const registros = new Map((data || []).map(item => [item.key, item.value]));
+                if (registros.has('vagas_paty_miguel_v2')) vagas = registros.get('vagas_paty_miguel_v2');
+                if (registros.has('curriculos_paty_miguel_v2')) curriculos = registros.get('curriculos_paty_miguel_v2');
+                if (registros.has('sidebar_ads_v2')) sidebarAdsData = registros.get('sidebar_ads_v2');
+                if (registros.has('header_data_v2')) headerData = registros.get('header_data_v2');
+                if (!Array.isArray(vagas)) vagas = [];
+                if (!Array.isArray(curriculos)) curriculos = [];
+                if (!Array.isArray(sidebarAdsData)) sidebarAdsData = [];
+                renderAll();
+                atualizarStatusSupabase('Dados atualizados pelo Supabase.', 'online');
+            } catch (error) {
+                atualizarStatusSupabase(`Erro ao baixar dados: ${error.message}`, 'error');
+            } finally {
+                sincronizandoNuvem = false;
+            }
+        }
+
+        async function sincronizarChave(key, value) {
+            if (!CHAVES_SINCRONIZADAS.has(key) || !supabaseClient || sincronizandoNuvem) return;
+            const { error } = await supabaseClient
+                .from('conexao_rh_data')
+                .upsert({ key, value, updated_at: new Date().toISOString() }, { onConflict: 'key' });
+            if (error) {
+                atualizarStatusSupabase(`Salvo neste aparelho; falha na nuvem: ${error.message}`, 'error');
+            } else {
+                atualizarStatusSupabase('Alterações sincronizadas.', 'online');
+            }
+        }
+
+        async function salvarSupabase() {
+            const url = document.getElementById('adminSupabaseUrl').value.trim().replace(/\/+$/, '');
+            const key = document.getElementById('adminSupabaseKey').value.trim();
+            if (!/^https:\/\/.+\.supabase\.co$/i.test(url) || !key) {
+                alert('Informe uma URL válida do Supabase e a chave pública.');
+                return;
+            }
+            localStorage.setItem('supabase_config_v1', JSON.stringify({ url, key }));
+            if (await iniciarSupabase(false)) {
+                for (const chave of CHAVES_SINCRONIZADAS) {
+                    const valor = readStorage(chave, null);
+                    if (valor !== null) await sincronizarChave(chave, valor);
+                }
+                alert('Supabase conectado. Os dados deste aparelho foram enviados para a nuvem.');
+            }
+        }
+
+        function desconectarSupabase() {
+            if (!confirm('Restaurar a conexão padrão do Supabase? Os dados locais serão mantidos.')) return;
+            localStorage.removeItem('supabase_config_v1');
+            supabaseClient = null;
+            document.getElementById('adminSupabaseUrl').value = SUPABASE_PADRAO.url;
+            document.getElementById('adminSupabaseKey').value = SUPABASE_PADRAO.key;
+            atualizarStatusSupabase('Reconectando ao Supabase padrão…');
+            iniciarSupabase(true);
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+
+        const vagasIniciais = [
+            { id: 1, titulo: 'Assistente de Estoque', empresa: 'Supermercado Local - Miguel Pereira, RJ', desc: 'Controle de entradas, validades e conferência de notas. Segunda a sábado.', whats: '5524981225133', email: 'rh@supermercadolocal.com', foto: '', data: 'Hoje' }
+        ];
+        let vagas = readStorage('vagas_paty_miguel_v2', vagasIniciais);
+
+        const curriculosIniciais = [
+            { id: 1, nome: 'Wagner Marques', cargo: 'Assistente Administrativo / CPD', resumo: 'Cursando Administração, experiência com processos, planilhas e sistemas de controle na região.', whats: '5524981225133', data: 'Hoje' }
+        ];
+        let curriculos = readStorage('curriculos_paty_miguel_v2', curriculosIniciais);
+
+        let sidebarAdsData = readStorage('sidebar_ads_v2', ['', '', '', '', '', '']);
+        
+        let headerData = readStorage('header_data_v2', {
+            title: 'Conexão RH - Paty Miguel e Região Sul Fluminense',
+            subtitle: 'Encontre oportunidades de emprego, divulgue seu currículo e cartazes de trabalho na nossa região.',
+            logo: '',
+            logoHeight: '80px',
+            logoWidth: '250px'
+        });
+
+        if (!Array.isArray(vagas)) vagas = vagasIniciais;
+        if (!Array.isArray(curriculos)) curriculos = curriculosIniciais;
+        if (!Array.isArray(sidebarAdsData)) sidebarAdsData = ['', '', '', '', '', ''];
+
+        let vagaEmEdicaoId = null;
+        let curriculoEmEdicaoId = null;
+        let adminAutenticado = false;
+
+        function formatarWhatsApp(numero) {
+            let limpo = String(numero ?? '').replace(/\D/g, '');
+            if (limpo.length > 0 && !limpo.startsWith('55')) {
+                limpo = '55' + limpo;
+            }
+            return limpo;
+        }
+
+        function tamanhoCssSeguro(valor, padrao) {
+            const texto = String(valor ?? '').trim();
+            return /^\d+(?:\.\d+)?(?:px|rem|em|%|vh|vw)$/i.test(texto) ? texto : padrao;
+        }
+
+        function toggleCampoContato(tipo) {
+            const checkbox = document.getElementById(`checkSem${tipo}`);
+            const input = document.getElementById(`vaga${tipo}`);
+            
+            if (checkbox.checked) {
+                input.value = '';
+                input.disabled = true;
+                input.required = false;
+                input.style.backgroundColor = '#f1f5f9';
+            } else {
+                input.disabled = false;
+                if (tipo === 'Whats') {
+                    input.required = true;
+                }
+                input.style.backgroundColor = '#ffffff';
+            }
+        }
+
+        function switchTab(tabId, button) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            const tab = document.getElementById(tabId);
+            if (!tab) return;
+            tab.classList.add('active');
+            if (button) button.classList.add('active');
+            renderAll();
+        }
+
+        function openModal(modalId) {
+            const modaisProtegidos = ['modalAdminAds', 'modalVaga', 'modalCurriculo'];
+            if (modaisProtegidos.includes(modalId) && !adminAutenticado) {
+                document.getElementById('modalLogin').classList.add('active');
+                return;
+            }
+            if (modalId === 'modalAdminAds') {
+                updateAdminSelectOptions();
+                document.getElementById('adminHeaderTitle').value = headerData.title;
+                document.getElementById('adminHeaderSub').value = headerData.subtitle;
+                document.getElementById('adminLogoHeight').value = headerData.logoHeight || '80px';
+                document.getElementById('adminLogoWidth').value = headerData.logoWidth || '250px';
+                const supabaseConfig = obterSupabaseConfig();
+                document.getElementById('adminSupabaseUrl').value = supabaseConfig.url || '';
+                document.getElementById('adminSupabaseKey').value = supabaseConfig.key || '';
+                atualizarStatusSupabase(
+                    supabaseClient ? 'Supabase conectado e sincronizado.' : 'Supabase não configurado.',
+                    supabaseClient ? 'online' : ''
+                );
+            }
+            if (modalId === 'modalVaga') {
+                if (vagaEmEdicaoId === null) {
+                    document.getElementById('formVaga').reset();
+                    document.getElementById('modalVagaTitle').innerText = 'Publicar Nova Vaga de Emprego';
+                    document.getElementById('submitVagaBtn').innerText = 'Publicar Vaga';
+                    document.getElementById('checkSemWhats').checked = false;
+                    document.getElementById('checkSemEmail').checked = false;
+                    toggleCampoContato('Whats');
+                    toggleCampoContato('Email');
+                }
+            }
+            if (modalId === 'modalCurriculo' && curriculoEmEdicaoId === null) {
+                document.getElementById('formCurriculo').reset();
+                document.getElementById('modalCurriculoTitle').innerText = 'Cadastrar Currículo';
+                document.getElementById('submitCurriculoBtn').innerText = 'Salvar Currículo';
+            }
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            modal.classList.add('active');
+            const firstField = modal.querySelector('input:not([type="file"]), button');
+            if (firstField) firstField.focus();
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('active');
+            if (modalId === 'modalVaga') vagaEmEdicaoId = null;
+            if (modalId === 'modalCurriculo') curriculoEmEdicaoId = null;
+        }
+
+        function editarVaga(id) {
+            if (!adminAutenticado) return;
+            const vaga = vagas.find(item => String(item.id) === String(id));
+            if (!vaga) return;
+            vagaEmEdicaoId = vaga.id;
+            document.getElementById('vagaTitulo').value = vaga.titulo || '';
+            document.getElementById('vagaEmpresa').value = vaga.empresa || '';
+            document.getElementById('vagaDesc').value = vaga.desc || '';
+            document.getElementById('vagaWhats').value = vaga.whats || '';
+            document.getElementById('vagaEmail').value = vaga.email || '';
+            document.getElementById('checkSemWhats').checked = !vaga.whats;
+            document.getElementById('checkSemEmail').checked = !vaga.email;
+            toggleCampoContato('Whats');
+            toggleCampoContato('Email');
+            document.getElementById('modalVagaTitle').innerText = 'Editar Vaga de Emprego';
+            document.getElementById('submitVagaBtn').innerText = 'Salvar Alterações';
+            openModal('modalVaga');
+        }
+
+        function editarCurriculo(id) {
+            if (!adminAutenticado) return;
+            const curriculo = curriculos.find(item => String(item.id) === String(id));
+            if (!curriculo) return;
+            curriculoEmEdicaoId = curriculo.id;
+            document.getElementById('cvNome').value = curriculo.nome || '';
+            document.getElementById('cvCargo').value = curriculo.cargo || '';
+            document.getElementById('cvResumo').value = curriculo.resumo || '';
+            document.getElementById('cvWhats').value = curriculo.whats || '';
+            document.getElementById('cvArquivo').value = '';
+            document.getElementById('modalCurriculoTitle').innerText = 'Editar Currículo';
+            document.getElementById('submitCurriculoBtn').innerText = 'Salvar Alterações';
+            openModal('modalCurriculo');
+        }
+
+        function abrirNovaVaga() {
+            if (!adminAutenticado) return;
+            vagaEmEdicaoId = null;
+            closeModal('modalAdminAds');
+            openModal('modalVaga');
+        }
+
+        function abrirNovoCurriculo() {
+            if (!adminAutenticado) return;
+            curriculoEmEdicaoId = null;
+            closeModal('modalAdminAds');
+            openModal('modalCurriculo');
+        }
+
+        function editarVagaSelecionada() {
+            const id = document.getElementById('adminVagaSelect').value;
+            if (!id || vagas.length === 0) {
+                alert('Nenhuma vaga selecionada.');
+                return;
+            }
+            closeModal('modalAdminAds');
+            editarVaga(id);
+        }
+
+        function editarCurriculoSelecionado() {
+            const id = document.getElementById('adminCurriculoSelect').value;
+            if (!id || curriculos.length === 0) {
+                alert('Nenhum currículo selecionado.');
+                return;
+            }
+            closeModal('modalAdminAds');
+            editarCurriculo(id);
+        }
+
+        function handleImageUpload(inputElement, callback) {
+            const file = inputElement.files[0];
+            if (file) {
+                if (!file.type.startsWith('image/')) {
+                    alert('Selecione um arquivo de imagem válido.');
+                    callback(false);
+                    return;
+                }
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('A imagem deve ter no máximo 2 MB.');
+                    callback(false);
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    callback(e.target.result);
+                };
+                reader.onerror = function() {
+                    alert('Não foi possível ler a imagem selecionada.');
+                    callback(false);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                callback('');
+            }
+        }
+
+        function handleDocumentUpload(inputElement, callback) {
+            const file = inputElement.files[0];
+            if (!file) {
+                callback(null);
+                return;
+            }
+            const extensaoValida = /\.(pdf|doc|docx)$/i.test(file.name);
+            if (!extensaoValida) {
+                alert('Selecione um currículo em PDF, DOC ou DOCX.');
+                callback(false);
+                return;
+            }
+            if (file.size > 2 * 1024 * 1024) {
+                alert('O arquivo deve ter no máximo 2 MB.');
+                callback(false);
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = event => callback({
+                data: event.target.result,
+                nome: file.name
+            });
+            reader.onerror = () => {
+                alert('Não foi possível ler o arquivo selecionado.');
+                callback(false);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function checkLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('loginUser').value;
+            const pass = document.getElementById('loginPass').value;
+
+            if (user === 'Wagner' && pass === 'vagasdeemprego') {
+                adminAutenticado = true;
+                document.getElementById('formLogin').reset();
+                closeModal('modalLogin');
+                openModal('modalAdminAds');
+            } else {
+                alert('Usuário ou senha incorretos!');
+            }
+        }
+
+        function triggerAdUpload(index) {
+            if (!adminAutenticado) return;
+            openModal('modalAdminAds');
+            document.getElementById('adminAdIndex').value = index;
+        }
+
+        function addNewAdSquare() {
+            sidebarAdsData.push('');
+            if (!writeStorage('sidebar_ads_v2', sidebarAdsData)) {
+                sidebarAdsData.pop();
+                return;
+            }
+            renderAds();
+            updateAdminSelectOptions();
+            document.getElementById('adminAdIndex').value = sidebarAdsData.length - 1;
+            alert('Novo quadrado de propaganda adicionado com sucesso!');
+        }
+
+        function updateAdminSelectOptions() {
+            const select = document.getElementById('adminAdIndex');
+            select.innerHTML = '';
+            sidebarAdsData.forEach((ad, i) => {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Quadrado de Propaganda ${i + 1}`;
+                select.appendChild(option);
+            });
+
+            const vagaSelect = document.getElementById('adminVagaSelect');
+            vagaSelect.innerHTML = '';
+            if (vagas.length === 0) {
+                const option = document.createElement('option');
+                option.textContent = 'Nenhuma vaga cadastrada';
+                vagaSelect.appendChild(option);
+            } else {
+                vagas.forEach(v => {
+                    const option = document.createElement('option');
+                    option.value = v.id;
+                    option.textContent = `${v.titulo} (${v.empresa})`;
+                    vagaSelect.appendChild(option);
+                });
+            }
+
+            const cvSelect = document.getElementById('adminCurriculoSelect');
+            cvSelect.innerHTML = '';
+            if (curriculos.length === 0) {
+                const option = document.createElement('option');
+                option.textContent = 'Nenhum currículo cadastrado';
+                cvSelect.appendChild(option);
+            } else {
+                curriculos.forEach(c => {
+                    const option = document.createElement('option');
+                    option.value = c.id;
+                    option.textContent = `${c.nome} - ${c.cargo}`;
+                    cvSelect.appendChild(option);
+                });
+            }
+        }
+
+        function saveHeaderSettings() {
+            const newTitle = document.getElementById('adminHeaderTitle').value;
+            const newSub = document.getElementById('adminHeaderSub').value;
+            const newH = tamanhoCssSeguro(document.getElementById('adminLogoHeight').value, '80px');
+            const newW = tamanhoCssSeguro(document.getElementById('adminLogoWidth').value, '250px');
+            const fileInput = document.getElementById('adminLogoFile');
+
+            handleImageUpload(fileInput, function(base64Image) {
+                if (base64Image === false) return;
+                const dadosAnteriores = { ...headerData };
+                headerData.title = newTitle.trim() || 'Conexão RH';
+                headerData.subtitle = newSub.trim();
+                headerData.logoHeight = newH;
+                headerData.logoWidth = newW;
+                if (base64Image) {
+                    headerData.logo = base64Image;
+                }
+                if (!writeStorage('header_data_v2', headerData)) {
+                    headerData = dadosAnteriores;
+                    return;
+                }
+                fileInput.value = '';
+                renderHeader();
+                closeModal('modalAdminAds');
+                alert('Cabeçalho e logo atualizados com sucesso!');
+            });
+        }
+
+        function removeHeaderLogo() {
+            if (confirm('Tem certeza que deseja remover a logo do topo?')) {
+                headerData.logo = '';
+                if (!writeStorage('header_data_v2', headerData)) return;
+                document.getElementById('adminLogoFile').value = '';
+                renderHeader();
+                closeModal('modalAdminAds');
+                alert('Logo removida com sucesso!');
+            }
+        }
+
+        function renderHeader() {
+            document.getElementById('headerTitleDisplay').innerText = headerData.title;
+            document.getElementById('headerSubtitleDisplay').innerText = headerData.subtitle;
+
+            const container = document.getElementById('headerLogoContainer');
+            if (headerData.logo) {
+                const image = document.createElement('img');
+                image.src = headerData.logo;
+                image.alt = 'Logo do Site';
+                image.style.setProperty('--logo-max-height', headerData.logoHeight || '80px');
+                image.style.setProperty('--logo-max-width', headerData.logoWidth || '250px');
+                container.replaceChildren(image);
+            } else {
+                container.innerHTML = '';
+            }
+        }
+
+        function saveAdminAd() {
+            const index = document.getElementById('adminAdIndex').value;
+            const fileInput = document.getElementById('adminAdFile');
+
+            handleImageUpload(fileInput, function(base64Image) {
+                if (base64Image === false) return;
+                if (base64Image) {
+                    const imagemAnterior = sidebarAdsData[index];
+                    sidebarAdsData[index] = base64Image;
+                    if (!writeStorage('sidebar_ads_v2', sidebarAdsData)) {
+                        sidebarAdsData[index] = imagemAnterior;
+                        return;
+                    }
+                    fileInput.value = '';
+                    closeModal('modalAdminAds');
+                    renderAds();
+                    alert('Anúncio atualizado com sucesso!');
+                } else {
+                    alert('Por favor, selecione uma imagem.');
+                }
+            });
+        }
+
+        function adminApagarVagaIndividual() {
+            const vagaId = document.getElementById('adminVagaSelect').value;
+            if (!vagaId || vagas.length === 0) {
+                alert('Nenhuma vaga selecionada.');
+                return;
+            }
+            if (confirm('Tem certeza que deseja apagar esta vaga selecionada?')) {
+                vagas = vagas.filter(v => v.id != vagaId);
+                writeStorage('vagas_paty_miguel_v2', vagas);
+                renderAll();
+                updateAdminSelectOptions();
+                alert('Vaga apagada com sucesso!');
+            }
+        }
+
+        function adminApagarCurriculoIndividual() {
+            const cvId = document.getElementById('adminCurriculoSelect').value;
+            if (!cvId || curriculos.length === 0) {
+                alert('Nenhum currículo selecionado.');
+                return;
+            }
+            if (confirm('Tem certeza que deseja apagar este currículo selecionado?')) {
+                curriculos = curriculos.filter(c => c.id != cvId);
+                writeStorage('curriculos_paty_miguel_v2', curriculos);
+                renderAll();
+                updateAdminSelectOptions();
+                alert('Currículo apagado com sucesso!');
+            }
+        }
+
+        function adminApagarTodasVagas() {
+            if (confirm('Tem certeza que deseja apagar TODAS as vagas publicadas? Esta ação não pode ser desfeita.')) {
+                vagas = [];
+                writeStorage('vagas_paty_miguel_v2', vagas);
+                renderAll();
+                updateAdminSelectOptions();
+                alert('Todas as vagas foram apagadas com sucesso!');
+            }
+        }
+
+        function adminApagarTodosCurriculos() {
+            if (confirm('Tem certeza que deseja apagar TODO o banco de currículos? Esta ação não pode ser desfeita.')) {
+                curriculos = [];
+                writeStorage('curriculos_paty_miguel_v2', curriculos);
+                renderAll();
+                updateAdminSelectOptions();
+                alert('Todos os currículos foram apagados com sucesso!');
+            }
+        }
+
+        function adminZerarContador() {
+            if (confirm('Tem certeza que deseja zerar o contador de visitantes?')) {
+                localStorage.setItem('site_visitor_count_v2', 0);
+                sessionStorage.setItem('visited_session', 'true');
+                initVisitorCounter();
+                alert('O contador de visitantes foi zerado!');
+            }
+        }
+
+        function renderAds() {
+            const container = document.getElementById('sidebarAdsContainer');
+            container.innerHTML = '';
+            
+            sidebarAdsData.forEach((adImg, i) => {
+                const square = document.createElement('div');
+                square.className = 'ad-square';
+                square.id = `ad-${i}`;
+                if (adImg) {
+                    square.innerHTML = `<img src="${escapeHtml(adImg)}" alt="Propaganda ${i+1}">`;
+                } else {
+                    square.innerHTML = `<span>Espaço Publicitário ${i+1}</span>`;
+                }
+                container.appendChild(square);
+            });
+        }
+
+        function renderAll() {
+            renderAds();
+            renderHeader();
+
+            const gridVagas = document.getElementById('gridVagas');
+            if (vagas.length === 0) {
+                gridVagas.innerHTML = '<div class="empty-state">Nenhuma vaga publicada no momento. Seja o primeiro a publicar!</div>';
+            } else {
+                gridVagas.innerHTML = vagas.map(v => `
+                    <div class="card">
+                        ${v.foto ? `<div class="card-img-container"><img src="${escapeHtml(v.foto)}" alt="Foto da vaga ${escapeHtml(v.titulo)}"></div>` : ''}
+                        <div class="card-body">
+                            <div class="card-tags-container">
+                                <span class="card-tag">Sul Fluminense</span>
+                                <span class="card-tag card-tag-sub">📍 Paty / Miguel Pereira</span>
+                            </div>
+                            <h3>${escapeHtml(v.titulo)}</h3>
+                            <p><strong>Empresa:</strong> ${escapeHtml(v.empresa)}<br><br>${escapeHtml(v.desc)}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-top">
+                                <span class="card-date">${escapeHtml(v.data)}</span>
+                            </div>
+                            <div class="card-actions">
+                                ${v.whats ? `
+                                    <a class="whatsapp-btn" href="https://api.whatsapp.com/send?phone=${formatarWhatsApp(v.whats)}&amp;text=${encodeURIComponent('Olá! Vi sua vaga no site Conexão RH e gostaria de me candidatar à vaga.')}" target="_blank" rel="noopener noreferrer">
+                                        💬 WhatsApp
+                                    </a>
+                                ` : `
+                                    <div class="nao-tem-badge">💬 WhatsApp: Não tem</div>
+                                `}
+                                
+                                ${v.email ? `
+                                    <a class="email-btn" href="mailto:${encodeURIComponent(v.email)}?subject=${encodeURIComponent('Candidatura para a vaga: ' + v.titulo)}&amp;body=${encodeURIComponent('Olá! Vi sua vaga no site Conexão RH e gostaria de me candidatar à vaga.')}">
+                                        ✉️ E-mail
+                                    </a>
+                                ` : `
+                                    <div class="nao-tem-badge">✉️ E-mail: Não tem</div>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const gridCurriculos = document.getElementById('gridCurriculos');
+            if (curriculos.length === 0) {
+                gridCurriculos.innerHTML = '<div class="empty-state">Nenhum currículo cadastrado no momento.</div>';
+            } else {
+                gridCurriculos.innerHTML = curriculos.map(c => `
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-tags-container">
+                                <span class="card-tag" style="background: #f3e8ff; color: #7c3aed;">Banco de Talentos</span>
+                                <span class="card-tag card-tag-sub">📍 Paty / Miguel Pereira</span>
+                            </div>
+                            <h3>${escapeHtml(c.nome)}</h3>
+                            <p><strong>Cargo Alvo:</strong> ${escapeHtml(c.cargo)}<br><br>${escapeHtml(c.resumo)}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-top">
+                                <span class="card-date">${escapeHtml(c.data)}</span>
+                            </div>
+                            <div class="card-actions">
+                                ${c.arquivo ? `
+                                    <a class="email-btn" href="${escapeHtml(c.arquivo)}" download="${escapeHtml(c.arquivoNome || `curriculo-${c.nome}.pdf`)}">
+                                        ⬇️ Baixar Currículo
+                                    </a>
+                                ` : `
+                                    <div class="nao-tem-badge">Arquivo ainda não disponível</div>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function addVaga(e) {
+            e.preventDefault();
+            const fotoInput = document.getElementById('vagaFoto');
+            const whatsVal = document.getElementById('vagaWhats').value.trim();
+            const emailVal = document.getElementById('vagaEmail').value.trim();
+            const vagaExistente = vagas.find(item => String(item.id) === String(vagaEmEdicaoId));
+
+            handleImageUpload(fotoInput, function(base64Image) {
+                if (base64Image === false) return;
+                const nova = {
+                    id: vagaExistente?.id || Date.now(),
+                    titulo: document.getElementById('vagaTitulo').value,
+                    empresa: document.getElementById('vagaEmpresa').value,
+                    desc: document.getElementById('vagaDesc').value,
+                    whats: whatsVal ? formatarWhatsApp(whatsVal) : '',
+                    email: emailVal,
+                    foto: base64Image || vagaExistente?.foto || '',
+                    data: vagaExistente?.data || 'Hoje'
+                };
+                const vagasAnteriores = [...vagas];
+                if (vagaExistente) {
+                    vagas = vagas.map(item => String(item.id) === String(vagaExistente.id) ? nova : item);
+                } else {
+                    vagas.unshift(nova);
+                }
+                if (!writeStorage('vagas_paty_miguel_v2', vagas)) {
+                    vagas = vagasAnteriores;
+                    return;
+                }
+                document.getElementById('formVaga').reset();
+                closeModal('modalVaga');
+                renderAll();
+            });
+        }
+
+        function addCurriculo(e) {
+            e.preventDefault();
+            const curriculoExistente = curriculos.find(item => String(item.id) === String(curriculoEmEdicaoId));
+            const arquivoInput = document.getElementById('cvArquivo');
+
+            handleDocumentUpload(arquivoInput, arquivoNovo => {
+                if (arquivoNovo === false) return;
+                const novoCv = {
+                    id: curriculoExistente?.id || Date.now(),
+                    nome: document.getElementById('cvNome').value,
+                    cargo: document.getElementById('cvCargo').value,
+                    resumo: document.getElementById('cvResumo').value,
+                    whats: formatarWhatsApp(document.getElementById('cvWhats').value),
+                    arquivo: arquivoNovo?.data || curriculoExistente?.arquivo || '',
+                    arquivoNome: arquivoNovo?.nome || curriculoExistente?.arquivoNome || '',
+                    data: curriculoExistente?.data || 'Hoje'
+                };
+                const curriculosAnteriores = curriculos;
+                if (curriculoExistente) {
+                    curriculos = curriculos.map(item => String(item.id) === String(curriculoExistente.id) ? novoCv : item);
+                } else {
+                    curriculos = [novoCv, ...curriculos];
+                }
+                if (!writeStorage('curriculos_paty_miguel_v2', curriculos)) {
+                    curriculos = curriculosAnteriores;
+                    return;
+                }
+                document.getElementById('formCurriculo').reset();
+                closeModal('modalCurriculo');
+                renderAll();
+            });
+        }
+
+        let installPromptEvent = null;
+
+        function dispositivoMovel() {
+            return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        }
+
+        function modoInstalado() {
+            return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+        }
+
+        function mostrarAvisoInstalacao() {
+            if (!dispositivoMovel() || modoInstalado()) return;
+            document.getElementById('installNotice').classList.add('active');
+        }
+
+        window.addEventListener('beforeinstallprompt', event => {
+            event.preventDefault();
+            installPromptEvent = event;
+            mostrarAvisoInstalacao();
+        });
+
+        window.addEventListener('appinstalled', () => {
+            installPromptEvent = null;
+            document.getElementById('installNotice').classList.remove('active');
+        });
+
+        document.getElementById('installLater').addEventListener('click', () => {
+            document.getElementById('installNotice').classList.remove('active');
+        });
+
+        document.getElementById('installApp').addEventListener('click', async () => {
+            const texto = document.getElementById('installText');
+            const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (installPromptEvent) {
+                installPromptEvent.prompt();
+                await installPromptEvent.userChoice;
+                installPromptEvent = null;
+                document.getElementById('installNotice').classList.remove('active');
+            } else if (ios) {
+                texto.textContent = 'No Safari, toque no botão Compartilhar e depois em “Adicionar à Tela de Início”.';
+            } else {
+                texto.textContent = 'Abra o menu do navegador (⋮) e toque em “Instalar aplicativo” ou “Adicionar à tela inicial”.';
+            }
+        });
+
+        initVisitorCounter();
+        renderAll();
+
+        window.addEventListener('load', async () => {
+            if ('serviceWorker' in navigator) {
+                try {
+                    await navigator.serviceWorker.register('./service-worker.js');
+                } catch (error) {
+                    console.warn('Não foi possível ativar o modo aplicativo.', error);
+                }
+            }
+            await iniciarSupabase(true);
+            setTimeout(mostrarAvisoInstalacao, 700);
+        });
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', event => {
+                if (event.target === modal) closeModal(modal.id);
+            });
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                const activeModal = document.querySelector('.modal.active');
+                if (activeModal) closeModal(activeModal.id);
+            }
+        });
+    </script>
+</body>
+</html>
